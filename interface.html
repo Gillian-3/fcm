@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCM Message Sender Interface</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>FCM Message Sender</h1>
+        <form id="messageForm">
+            <div class="input-group">
+                <select id="topic" required>
+                    <option value="">Select a topic</option>
+                </select>
+                <label for="topic">Topic</label>
+            </div>
+            <div class="input-group">
+                <input type="text" id="title" required>
+                <label for="title">Message Title</label>
+            </div>
+            <div class="input-group">
+                <textarea id="body" required></textarea>
+                <label for="body">Message Body</label>
+            </div>
+            <div class="input-group">
+                <input type="text" id="sound">
+                <label for="sound">Notification Sound</label>
+            </div>
+            <div class="input-group">
+                <input type="text" id="clickAction">
+                <label for="clickAction">Click Action</label>
+            </div>
+            <div class="input-group">
+                <textarea id="dataPayload"></textarea>
+                <label for="dataPayload">Data Payload (JSON)</label>
+            </div>
+            <div class="input-group">
+                <select id="priority">
+                    <option value="normal">Normal</option>
+                    <option value="high">High</option>
+                </select>
+                <label for="priority">Priority</label>
+            </div>
+            <div class="input-group">
+                <input type="number" id="ttl">
+                <label for="ttl">Time to Live (seconds)</label>
+            </div>
+            <div class="input-group">
+                <input type="url" id="imageUrl">
+                <label for="imageUrl">Image URL</label>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+    <div id="loader" class="loader hidden"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/interface.js"></script>
+</body>
+</html>
