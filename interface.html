@@ -3,59 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FCM Message Sender Interface</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>FCM Message Sender Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>FCM Message Sender</h1>
-        <form id="messageForm">
-            <div class="input-group">
-                <select id="topic" required>
-                    <option value="">Select a topic</option>
-                </select>
-                <label for="topic">Topic</label>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">FCM Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Message Logs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Send FCM Message</h1>
+        <div class="row">
+            <div class="col-md-8">
+                <form id="messageForm">
+                    <div class="form-group">
+                        <label for="topic">Topic</label>
+                        <select class="form-control" id="topic" required>
+                            <option value="">Select a topic</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Message Title</label>
+                        <input type="text" class="form-control" id="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Message Body</label>
+                        <textarea class="form-control" id="body" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sound">Notification Sound</label>
+                        <input type="text" class="form-control" id="sound">
+                    </div>
+                    <div class="form-group">
+                        <label for="clickAction">Click Action</label>
+                        <input type="text" class="form-control" id="clickAction">
+                    </div>
+                    <div class="form-group">
+                        <label for="dataPayload">Data Payload (JSON)</label>
+                        <textarea class="form-control" id="dataPayload" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="priority">Priority</label>
+                        <select class="form-control" id="priority">
+                            <option value="normal">Normal</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ttl">Time to Live (seconds)</label>
+                        <input type="number" class="form-control" id="ttl">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl">Image URL</label>
+                        <input type="url" class="form-control" id="imageUrl">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
             </div>
-            <div class="input-group">
-                <input type="text" id="title" required>
-                <label for="title">Message Title</label>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Recent Messages
+                    </div>
+                    <ul class="list-group list-group-flush" id="recentMessages">
+                        <!-- Recent messages will be dynamically added here -->
+                    </ul>
+                </div>
             </div>
-            <div class="input-group">
-                <textarea id="body" required></textarea>
-                <label for="body">Message Body</label>
-            </div>
-            <div class="input-group">
-                <input type="text" id="sound">
-                <label for="sound">Notification Sound</label>
-            </div>
-            <div class="input-group">
-                <input type="text" id="clickAction">
-                <label for="clickAction">Click Action</label>
-            </div>
-            <div class="input-group">
-                <textarea id="dataPayload"></textarea>
-                <label for="dataPayload">Data Payload (JSON)</label>
-            </div>
-            <div class="input-group">
-                <select id="priority">
-                    <option value="normal">Normal</option>
-                    <option value="high">High</option>
-                </select>
-                <label for="priority">Priority</label>
-            </div>
-            <div class="input-group">
-                <input type="number" id="ttl">
-                <label for="ttl">Time to Live (seconds)</label>
-            </div>
-            <div class="input-group">
-                <input type="url" id="imageUrl">
-                <label for="imageUrl">Image URL</label>
-            </div>
-            <button type="submit">Send Message</button>
-        </form>
+        </div>
     </div>
-    <div id="loader" class="loader hidden"></div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/interface.js"></script>
+
+    <div id="loader" class="loader hidden">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">© 2024 FCM Message Sender. All rights reserved.</span>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="interface.js"></script>
 </body>
 </html>
